@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
+## Pagina Ecommerce subida a https://fuenterosa.netlify.app/
+
+Usanndo Next.js Strapi Stripe pagina del backend para administrar los productos usuarios compras etc: https://ecommerce-fuenterosa.herokuapp.com/admin
 
 ## Getting Started
 
