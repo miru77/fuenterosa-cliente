@@ -2,7 +2,8 @@
 
 ## Pagina Ecommerce subida a https://fuenterosa.netlify.app/
 
-Usanndo Next.js Strapi Stripe pagina del backend para administrar los productos usuarios compras etc: https://ecommerce-fuenterosa.herokuapp.com/admin
+Se usó:  Next.js, Strapi, Stripe  
+Página del backend para administrar los productos, usuarios, compras etc: https://ecommerce-fuenterosa.herokuapp.com/admin
 
 ## Getting Started
 
