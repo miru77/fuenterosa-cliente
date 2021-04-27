@@ -8,8 +8,14 @@ import useCart from "../../../hooks/useCart"
 import {getMeApi} from "../../../api/user"
 import {getPlatformApi} from "../../../api/platform"
 import {map} from "lodash"
+import {breakpointUpSm} from "../../../utils/breakpoint"
+import useWindowSize from "../../../hooks/useWindowSize"
+
 
 export default function MenuWeb() {
+
+    const {width} = useWindowSize();
+
 
     const [platforms, setPlatforms] = useState([])
 
@@ -46,17 +52,35 @@ export default function MenuWeb() {
         <div className="menu">
             <Container>
                 <Grid>
-                    <Grid.Column className="menu__left" width={6}>
+
+                { (width > breakpointUpSm) ? (
+                    <>
+                      <Grid.Column className="menu__left" mobile={16} tablet={16} computer={6}>
                         <MenuPlatforms platforms={platforms}/>
                     </Grid.Column>
-                    <Grid.Column className="menu__right" width={10}>
+                    <Grid.Column className="menu__right" mobile={16} tablet={16} computer={10}>
+                      
+                      {user !== undefined &&  <MenuOptions width={width} onShowModal={onShowModal} 
+                        user={user}
+                        logout={logout}
+                      />}
+                    
+                    </Grid.Column>
+                    </>
+
+                ) : (
+                    <>
+                     <Grid.Column className="menu__right" mobile={16} tablet={16} computer={10}>
                       
                       {user !== undefined &&  <MenuOptions onShowModal={onShowModal} 
                         user={user}
                         logout={logout}
                       />}
-                   
+                    
                     </Grid.Column>
+                    </>
+                ) }
+                  
                 </Grid>
             </Container>
             <BasicModal show={showModal} setShow = {setshowModal} title={titleModal} size="small">
@@ -85,8 +109,10 @@ function MenuPlatforms({platforms}) {
 
 function MenuOptions(props) {
 
-    const {onShowModal, user, logout} = props;
+    const {onShowModal, user, logout, width} = props;
     const {productsCart} = useCart()
+    
+
 
     return(
 
@@ -96,21 +122,27 @@ function MenuOptions(props) {
                 <Link href="/order">
                 <Menu.Item as="a">
                      <Icon name="game"/>
-                  Mis pedidos
+                     { (width > breakpointUpSm) ? (" Mis pedidos") :("")}
+                
               </Menu.Item>
                 </Link>
 
                 <Link href="/wishlist">
                 <Menu.Item as="a">
                      <Icon name="heart outline"/>
-                  Favoritos
+                     { (width > breakpointUpSm) ? ("Favoritos") :("")}
               </Menu.Item>
                 </Link>
 
                 <Link href="/account">
                 <Menu.Item as="a">
                      <Icon name="user outline"/>
-                  {user.name} {user.lastname}
+
+                     { (width > breakpointUpSm) ? (<>
+                        {user.name} {user.lastname}
+                     </>) :<>  {user.name}
+                     </>}
+                
               </Menu.Item>
                 </Link>
 

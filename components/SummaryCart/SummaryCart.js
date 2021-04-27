@@ -2,9 +2,15 @@ import React, {useState, useEffect} from 'react'
 import {Table, Image, Icon} from "semantic-ui-react"
 import {forEach, map} from "lodash"
 import useCart from "../../hooks/useCart"
+import {breakpointUpMd} from "../../utils/breakpoint"
+import useWindowSize from "../../hooks/useWindowSize"
+
+
 
 
 export default function SummaryCart({products, setReloadCart, reloadCart}) {
+
+    const {width} = useWindowSize();
 
     const [totalPrice, setTotalPrice] = useState(0)
 
@@ -33,15 +39,28 @@ export default function SummaryCart({products, setReloadCart, reloadCart}) {
                <Table celled structured>
                    <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Producto</Table.HeaderCell>
-                            <Table.HeaderCell>Categoria</Table.HeaderCell>
-                            <Table.HeaderCell>Entrega</Table.HeaderCell>
-                            <Table.HeaderCell>Precio</Table.HeaderCell>
+                            { (width > breakpointUpMd) ? (
+                                <>
+                                 <Table.HeaderCell textAlign='center'>Producto</Table.HeaderCell>
+                                 <Table.HeaderCell>Categoria</Table.HeaderCell>
+                                 <Table.HeaderCell>Entrega</Table.HeaderCell>
+                                 <Table.HeaderCell>Precio</Table.HeaderCell>
+                                 </>
+
+                            ) : (
+                                <>
+                                <Table.HeaderCell  textAlign='center' >Producto</Table.HeaderCell>
+                           
+                              
+                                </>
+                            ) }
+                           
                         </Table.Row>
                    </Table.Header>
                    <Table.Body>
                        {map(products, (product) => (
                            <Table.Row key={product.id} className="summary-cart__product">
+
                                <Table.Cell>
                                     <Icon 
                                         name="close" link  onClick={()=> removeProduct(product.url)}
@@ -51,6 +70,7 @@ export default function SummaryCart({products, setReloadCart, reloadCart}) {
                                     />
                                     {product.title}
                                </Table.Cell>
+                               
                                <Table.Cell>
                                    {product.platform.title}
                                </Table.Cell>
@@ -60,13 +80,14 @@ export default function SummaryCart({products, setReloadCart, reloadCart}) {
                                <Table.Cell>
                                    {product.price} $
                                </Table.Cell>
+
                            </Table.Row>
                        ))}
                     <Table.Row className="summary-cart__resumen">
                         <Table.Cell className="clear" />
                         <Table.Cell colSpan="2">Total:</Table.Cell>
                         <Table.Cell className="total-price">{(totalPrice).toFixed(2)} $</Table.Cell>
-                        
+                         
                     </Table.Row>
 
                    </Table.Body>

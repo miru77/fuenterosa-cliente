@@ -6,10 +6,15 @@ import "moment/locale/es"
 
 export default function InfoGame({game}) {
 
+    const {video} = game
+
+    
 
     return (
         <div className="info-game">
-            <ReactPlayer className="info-game__video" url={game.video}/>
+
+
+           { video && <ReactPlayer className="info-game__video" url={video}/>}
 
             <CarruselScreenshots title={game.title} screenshots={game.screenshots}/>
 

@@ -5,6 +5,8 @@ import {isFavoriteApi, addFavoriteApi, deleteFavoriteApi} from "../../../api/fav
 import classNames from "classnames"
 import useAuth from "../../../hooks/useAuth"
 import useCart from "../../../hooks/useCart"
+import {breakpointUpSm} from "../../../utils/breakpoint"
+import useWindowSize from "../../../hooks/useWindowSize"
 
 
 export default function HeaderGame({game}) {
@@ -73,7 +75,7 @@ function Info({game, isFavorite, auth, logout, setRealoadFavorite}) {
 
             <div className="header-game__buy">
                 <div className="header-game__buy-price">
-                    <p>Precio de venta al publico: {price} $</p>
+                    <p>Precio de venta al publico: {price}$</p>
                     <div className="header-game__buy-price-actions">
                     <p> - {discount} %</p>
                     <p>{(price - Math.floor(price * discount) / 100).toFixed(2)} $</p>

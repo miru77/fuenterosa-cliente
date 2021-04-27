@@ -9,7 +9,7 @@ import {breakpointUpLg, breakpointUpMd, breakpointUpSm} from "../../utils/breakp
 export default function ListGames({games}) {
 
     const {width} = useWindowSize();
-
+ 
 
     const getColumnsRender = () => {
         switch (true) {
